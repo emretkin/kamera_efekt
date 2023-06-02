@@ -275,27 +275,26 @@ class GUI {
 
         return image;
     }
-    public BufferedImage siyahBeyaz(BufferedImage img){
+     
+     public BufferedImage siyahBeyaz(BufferedImage img) {
         BufferedImage image = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_RGB);
-
-        int height=image.getHeight();
-        int width=image.getWidth();
-
-        Graphics displayGraphics = image.createGraphics();
-        displayGraphics.drawImage(img, 0, 0, null);
-        displayGraphics.dispose();
-
+        int width = img.getWidth();
+        int height = img.getHeight();
 
 
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
-                int rgb = image.getRGB(x, y);
-                int gray = (int) (0.299 * ((rgb >> 16) & 0xFF) + 0.587 * ((rgb >> 8) & 0xFF) + 0.114 * (rgb & 0xFF));
-                int black = (gray << 16) + (gray << 8) + gray;
-                image.setRGB(x, y, black);
+                Color c = new Color(img.getRGB(x, y));
+                int red = c.getRed();
+                int green = c.getGreen();
+                int blue = c.getBlue();
+
+                int gray = (red + green + blue) / 3;
+
+                Color gColor = new Color(gray, gray, gray);
+                image.setRGB(x, y, gColor.getRGB());
             }
         }
-
 
         return image;
     }
@@ -333,6 +332,7 @@ class GUI {
         int result = fileChooser.showSaveDialog(null);
         if (result == JFileChooser.APPROVE_OPTION) {
             path = fileChooser.getSelectedFile().getAbsolutePath();
+            path=path+".jpg";
             ImageIO.write(img, "JPG", new File(path));
         }
         return path;
