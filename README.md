@@ -1,2 +1,2 @@
 
-Projede Fotoğraf çekilmekte istenildiğinde bazı efektler yapılıp istenilen dizine kaydedilerek ardından twitterda paylaşılabilmektedir.
+Projede fotoğraf çekilebilir, efektler yapabilir ve twitterda paylaşabilirsiniz.
